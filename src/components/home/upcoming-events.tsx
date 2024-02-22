@@ -1,5 +1,5 @@
 import { CalendarOutlined } from "@ant-design/icons";
-import { Card, List } from "antd";
+import { Card, List, Badge } from "antd";
 import { Text } from "../text";
 import { useState } from "react";
 import UpcomingEventsSkeleton from "../skeleton/upcoming-events";
@@ -12,9 +12,11 @@ const UpcomingEvents = () => {
 
   const { data, isLoading: eventsLoading } = useList({
     resource: "events",
+    pagination: { pageSize: 5 },
     meta: { gqlQuery: DASHBORAD_CALENDAR_UPCOMING_EVENTS_QUERY },
   });
-  console.log(data);
+  console.log("data", data);
+
   return (
     <Card
       style={{ height: "100%" }}
@@ -46,8 +48,9 @@ const UpcomingEvents = () => {
       ) : (
         <List
           itemLayout="horizontal"
-          dataSource={[]}
+          dataSource={data?.data || []}
           renderItem={(item) => {
+            console.log("item", item);
             const renderDate = getDate(item.startDate, item.endDate);
 
             return (
