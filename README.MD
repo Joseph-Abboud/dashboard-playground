@@ -1,4 +1,4 @@
-# full-paths-throw
+# Dashboard Project!
 
 <div align="center" style="margin: 30px;">
     <a href="https://refine.dev">
