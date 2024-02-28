@@ -25,6 +25,7 @@ import { resources } from "./config/resources";
 import Create from "./pages/company/create";
 import EditPage from "./pages/company/edit";
 import ContactsPage from "./pages/contacts";
+import List from "./pages/tasks/list";
 
 function App() {
   return (
@@ -71,6 +72,9 @@ function App() {
                     <Route path="edit/:id" element={<EditPage />} />
                   </Route>
                   <Route path="/contacts" element={<ContactsPage />} />
+                  <Route path="/tasks">
+                    <Route index element={<List />} />
+                  </Route>
                 </Route>
               </Routes>
               <RefineKbar />
