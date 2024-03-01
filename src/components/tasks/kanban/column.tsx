@@ -36,7 +36,7 @@ const KanbanColumn = ({
       ref={setNodeRef}
       style={{ display: "flex", flexDirection: "column", padding: "0 16px" }}
     >
-      <div style={{ width: "100%", justifyContent: "space-between" }}>
+      <div style={{ padding: "12px" }}>
         <Space style={{ width: "100%", justifyContent: "space-between" }}>
           <Space>
             <Text
