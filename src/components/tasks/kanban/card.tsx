@@ -9,6 +9,7 @@ import {
   EyeOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
+import { useDelete, useNavigation } from "@refinedev/core";
 import {
   Button,
   Card,
@@ -21,7 +22,7 @@ import {
 } from "antd";
 import { MenuProps } from "antd/lib";
 import dayjs from "dayjs";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 type ProjectCardProps = {
   id: string;
@@ -38,7 +39,8 @@ type ProjectCardProps = {
 const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
   const { token } = theme.useToken();
 
-  const edit = () => {};
+  const { edit } = useNavigation();
+  const { mutate } = useDelete();
 
   const dropdownItems = useMemo(() => {
     const dropdownItems: MenuProps["items"] = [
@@ -47,7 +49,7 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
         key: "1",
         icon: <EyeOutlined />,
         onClick: () => {
-          edit();
+          edit("tasks", id, "replace");
         },
       },
       {
@@ -55,7 +57,9 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
         label: "Delete Card",
         key: "2",
         icon: <DeleteOutlined />,
-        onClick: () => {},
+        onClick: () => {
+          mutate({ resource: "task", id, meta: { operation: "task" } });
+        },
       },
     ];
 
@@ -158,3 +162,15 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
 };
 
 export default ProjectCard;
+
+export const ProjectCardMemo = memo(ProjectCard, (prev, next) => {
+  return (
+    prev.id === next.id &&
+    prev.title === next.title &&
+    prev.dueDate === next.dueDate &&
+    prev.users?.length === next.users?.length &&
+    prev.updatedAt === next.updatedAt
+  );
+});
+
+// 4:41 from tuts
