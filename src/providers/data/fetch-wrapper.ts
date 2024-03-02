@@ -26,7 +26,7 @@ const getGraphQLErrors = (
 ): Error | null => {
   if (!body) {
     return {
-      message: "Unkown Error",
+      message: "Unknown error",
       statusCode: "INTERNAL_SERVER_ERROR",
     };
   }

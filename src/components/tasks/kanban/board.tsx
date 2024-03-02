@@ -6,7 +6,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { Props } from "@dnd-kit/core/dist/components/DndContext/DndContext";
+
 import { Children } from "react";
 import { TLSSocket } from "tls";
 
