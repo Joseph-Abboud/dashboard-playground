@@ -57,27 +57,6 @@ const Create = () => {
           >
             <Input placeholder="Please enter a company name!" />
           </Form.Item>
-          <Form.Item
-            label="Sales Owner"
-            name="salesOwnerId"
-            rules={[{ required: true }]}
-          >
-            <Select
-              placeholder="Please a sales person!"
-              {...selectProps}
-              options={
-                queryResult.data?.data.map((user) => ({
-                  value: user.id,
-                  label: (
-                    <SelectOptionWithAvatar
-                      name={user.name}
-                      avatarUrl={user.avatarUrl ?? undefined}
-                    />
-                  ),
-                })) ?? []
-              }
-            />
-          </Form.Item>
         </Form>
       </Modal>
     </CompanyList>

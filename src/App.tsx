@@ -5,7 +5,7 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
-import { authProvider, dataProvider, liveProvider } from "./providers";
+import { dataProvider } from "@refinedev/supabase";
 import { Home, ForgotPassword, Register, Login, CompanyList } from "./pages";
 
 import routerBindings, {
@@ -23,7 +23,8 @@ import ContactsPage from "./pages/contacts";
 import List from "./pages/tasks/list";
 import CreateTask from "./pages/tasks/create";
 import EditTask from "./pages/tasks/edit";
-
+import { supabaseClient } from "./utilities/supabaseClient";
+import authProvider from "./authProvider";
 function App() {
   return (
     <BrowserRouter>
@@ -31,8 +32,7 @@ function App() {
         <AntdApp>
           <DevtoolsProvider>
             <Refine
-              dataProvider={dataProvider}
-              liveProvider={liveProvider}
+              dataProvider={dataProvider(supabaseClient)}
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
