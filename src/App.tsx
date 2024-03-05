@@ -25,6 +25,7 @@ import CreateTask from "./pages/tasks/create";
 import EditTask from "./pages/tasks/edit";
 import { supabaseClient } from "./utilities/supabaseClient";
 import authProvider from "./authProvider";
+import { PostCreate, PostEdit, PostList } from "./pages/posts";
 function App() {
   return (
     <BrowserRouter>
@@ -78,6 +79,11 @@ function App() {
                   >
                     <Route path="new" element={<CreateTask />} />
                     <Route path="edit/:id" element={<EditTask />} />
+                  </Route>
+                  <Route path="/posts">
+                    <Route index element={<PostList />} />
+                    <Route path="create" element={<PostCreate />} />
+                    <Route path="edit/:id" element={<PostEdit />} />
                   </Route>
                 </Route>
               </Routes>

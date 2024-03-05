@@ -43,4 +43,14 @@ export const resources: IResourceItem[] = [
       icon: <ProjectOutlined />,
     },
   },
+  {
+    name: "posts",
+    list: "/posts",
+    create: "/posts/create",
+    edit: "/posts/edit/:id",
+    meta: {
+      label: "Posts",
+      icon: <ProjectOutlined />,
+    },
+  },
 ];
