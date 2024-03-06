@@ -26,6 +26,7 @@ import EditTask from "./pages/tasks/edit";
 import { supabaseClient } from "./utilities/supabaseClient";
 import authProvider from "./authProvider";
 import { PostCreate, PostEdit, PostList } from "./pages/posts";
+
 function App() {
   return (
     <BrowserRouter>

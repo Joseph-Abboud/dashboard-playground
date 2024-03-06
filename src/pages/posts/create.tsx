@@ -68,21 +68,30 @@ export const PostCreate: React.FC = () => {
               customRequest={async ({ file, onError, onSuccess }) => {
                 try {
                   const rcFile = file as RcFile;
-                  await supabaseClient.storage
-                    .from("refine")
-                    .upload(`public/${rcFile.name}`, file, {
-                      cacheControl: "3600",
-                      upsert: true,
-                    });
+                  const BUCKET_NAME = "refine"; // Set your bucket name
+                  const storage = supabaseClient.storage.from(BUCKET_NAME);
 
-                  const { data } = await supabaseClient.storage
-                    .from("refine")
-                    .getPublicUrl(`public/${rcFile.name}`);
+                  const filePath = `public/${rcFile.name}`;
+
+                  await storage.upload(filePath, file, {
+                    cacheControl: "3600",
+                    upsert: true,
+                  });
+
+                  const { data } = await storage.getPublicUrl(
+                    `public/${rcFile.name}`
+                  );
 
                   const xhr = new XMLHttpRequest();
                   onSuccess && onSuccess({ url: data?.publicUrl }, xhr);
+
+                  console.log("Starting file upload...");
+                  console.log("File path:", filePath);
+                  console.log("File:", file);
                 } catch (error) {
-                  onError && onError(new Error("Upload Error"));
+                  console.error("Error during file upload:", error);
+                  onError &&
+                    onError(new Error(`Upload Error: ${error.message}`));
                 }
               }}
             >
